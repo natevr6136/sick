@@ -9,7 +9,7 @@ class GameInfo:
     def __init__(self):
         self.TitleId: str = "97D79"
         self.SecretKey: str = "NI6M5S97RHP358XEE5DOE6TS5TZW3WBSFQ69QKT5PP5FFWUNZ6"
-        self.ApiKey: str = "OC|26149033444730177|a1e6dafd3a9da2a0e226e97fbca500b7"
+        self.ApiKey: str = "OC|26113061641717267|8cdc1db39c128a9202a0bb220d3bfc96"
         self.DiscordWebhook: str = ""
 
     def get_auth_headers(self):
