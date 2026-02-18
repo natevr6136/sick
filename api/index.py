@@ -297,8 +297,8 @@ def Check():
 
 class GameInfo:
     def __init__(self):
-        self.TitleId: str = "97D79"
-        self.SecretKey: str = "NI6M5S97RHP358XEE5DOE6TS5TZW3WBSFQ69QKT5PP5FFWUNZ6"
+        self.TitleId: str = "15C8F2"
+        self.SecretKey: str = "KTYWMWWYUEXAHURKEENTRQYXCFFCUQ9ONHSAIATOCBHK4S31X7"
         self.ApiKey: str = "OC|7036679606437134|7b6ae85b607f465a418c7e25db8e0ffa"
         self.DiscordWebhook: str = ""
 
