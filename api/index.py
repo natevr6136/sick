@@ -3,6 +3,58 @@ import random
 from flask import Flask, jsonify, request
 import json
 import os
+import flask
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+badNames = [
+    "NIG", "NIIG", "KKK", "NIGA", "NAZI", "BIGNIG", "BLACKNIG", "NIGAH", "BANANANIG", "NIGIS", "GAYNIG",
+    "FAG", "NIGGA", "NIGNIG", "NIGZILLA", "NIGG", "NIGABALLS", "NIGMON", "NIGNOG", "NIGSY", "NIGRE",
+    "GORILLANIG", "NIGKEY", "GORNIGA", "DADDYNIGA", "NIGMON", "HITLER", "NIIG", "N1GGA", "N1GA", "NIGR",
+    "N1GGA", "N1GA", "N199A", "KKKLORD", "KKKMEMBER", "KKKMAN", "KKKMASTER", "KKKLEADER", "STINKYJEW",
+    "NIGAB", "NIGAMO", "NIBBA", "NIGLET", "NIGWERD", "NIGUH", "NIGK", "NIGWARD", "NIQQA", "NIGDIRT", "NI99",
+    "MONKENIGA", "NIGAB", "NIGHA", "H1TLER", "HITL3R", "H1TL3R", "KKKOFFICIAL", "NIGBA11S", "SPIDERNIG",
+    "NIGSLAVE", "NIGILA", "NIGBALL", "NIGILLA", "SPIDANIGA", "BLACKNIGA", "NIG2MONKE", "NIGMAN", "NIGATOES",
+    "NIGMAN", "NIGWAD", "MYNIGA", "NIGTARD", "NIGTURD", "NIGWORD", "NIGLIT", "NIGMAN", "NIGLER", "NIGSBALL",
+    "SANDNIG", "SNOWNIG", "NIGQA", "DIRTYNIG", "NIGAFUCK", "HITTLER", "NIGFART", "NIGBA", "N1GWARD", "NIGHKA",
+    "LITTLENIG", "NIGAH", "NIGBOB", "MASTERNIG", "NIGBOT", "NIGVR", "WARNIG",
+    "NIGGER", "NIGGGER", "NIGERZ", "FAGGOT", "NIGAR", "NIGUR", "NIGG3R", "N1GGER", "N1GG3R", "NIGER",
+    "NIGKILL", "NIGASLAYER", "NIGERMON", "NI66ER", "GEORGEFL", "GEORGFL", "NIIGGE", "NIIGGR", "CHINK",
+    "N1GUR", "N1GER", "NICKG", "NIKGU", "NIKGE", "N199GE", "GASJEW", "KILLJEW", "JEWSLAYER", "JEWSSUCK",
+    "GASTHEJEW", "KIKE", "NIBBER", "NIGOR", "NIGCER", "FUCKBLACK", "NIQQER", "FUCKJEW", "NI99ER", "NATEHIG",
+    "FUCKLGBT", "FVCKLGBT", "HATELGBT", "NIG5ER", "IHATEGAY", "IH8GAY", "IH8LGBT", "IH8JEW", "IH8BLACK",
+    "NICGER", "NIGQER", "H8NIG", "NIG3ER", "NIG3R", "NIGHER", "IHATENIG", "MONKEYNIG", "NIGEATSKFC",
+    "FUCKGAYS", "N199ER", "N1663R", "N1993R", "N166ER", "NIGHUR", "N1G3R", "N1GGGERR", "NIG4R", "NIGEER",
+    "NIGYR", "NIGBIGGER", "NIGCKER", "NIGIR", "NIG33R", "KXK", "KKX", "XXK", "KXX", "JMAN", "K9", "GAY9", "SLAVE",
+    "H1TLER", "PENIS", "VAGINA", "MAXO", "ELLIOT", "KILLNIGGERS", "PORNHUB", "CHILDPORN", "CP", "DICK", "ANAL",
+    "MINI99", "GAYSEX", "RAPE", "PORNO", "LESBIAN", "CUMSLUT", "DEEPTHROAT", "JMANCURLY", "DAISY09", "J3VU", "BOT",
+    "TTTPIG", "JMANCURLY", "STATUE", "JMANFAN", "TTT", "MOSA", "H4PKY", "WARNING", "HACKER", "GAYMANCURLY",
+    "TTTPIGFAN", "ELLIOTFAN", "H4PKYFAN", "MOSAFAN", "TOP1GROUND", "TOP1FLICK", "PIG", "BRN", "BRNMOSA", "GTC",
+    "BODA", "K9", "K9FAN", "MAXOFAN", "ELLIOTJR", "TTTPIGJR", "TTTJR", "PIGJR", "MAXOJR", "JMANJR", "JMANCURLYJR",
+    "911", "TERRORIST", "TWINTOWERS", "SKIBIDI", "SKIBIDITOILET", "L1RSONISGAY", "SILLYISGAY", "TOP1", "VMT", "VMTFAN",
+    "VMTJR", "TTPIG", "LEMMING", "CJVR", "NIGER", "NIGA", "ALECVR", "GAYPIG", "FUCKNIGGERS", "FUCKNIGGAS", "SAVAFAN", 
+    "SAVA", "SAVAJR", "FUCKNIGAS", "NIGA", "NIGGERA", "NIGERA", "SUCKMYDICK", "SAVAFAN", "SAVA", "SAVAVR", "COSMO" # add more if needed lol
+]
+
+# result : 1 warns the user
+# result : 2 kicks the user from the game
+# result : 0 means the name is good
+
+@app.route("/api/CheckForBadName", methods=["POST"])
+def Check():
+    room = request.get_json().get("FunctionArgument", {}).get("forRoom")
+    name = request.get_json().get("FunctionArgument", {}).get("name")
+
+    if name in badNames:
+        return jsonify({
+            "result": 1
+        }), 200
+    
+    else:
+        return jsonify({
+            "result": 0
+        })
 
 
 class GameInfo:
